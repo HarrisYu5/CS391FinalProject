@@ -1,11 +1,11 @@
 "use client";
 
-<<<<<<< HEAD
 //page.tsx/ Input Calories component- Lilly Anestal was responsible for all the code in this page
 // our team was to use tailwind for CSS-in-JS styled but. I had to use inline styling because for some reason tailwind was not working and I was unable to install styled components.
 
 import React, { useState } from "react";
-//import Dashboard from "../components/Dashboard";
+import Dashboard from "./components/Dashboard";
+
 
 export default function Home() {
   const [dailyGoal, setDailyGoal] = useState(""); // input daily goal
@@ -227,19 +227,10 @@ export default function Home() {
 
   {/* Display the daily goal and total calories consumed so far to the Dashboard component*/}
 {/* Pass the total calories and daily goal as props to the dashboard component */ }
- {/* <Dashboard savedGoal={savedGoal} totalCalories={totalCal} > */}
+<Dashboard savedGoal={savedGoal} totalCalories={totalCal} />
+
+
 
 </div>
   );
-=======
-import Search from "../com/Search";
-
-export default function Home() {
-  return (
-    <div>
-        <h1>Calorie Counter</h1>
-        <Search />
-    </div>
-);
->>>>>>> origin/main
 }
