@@ -1,101 +1,233 @@
-import Image from "next/image";
+"use client";
+
+//page.tsx/ Input Calories component- Lilly Anestal was responsible for all the code in this page
+// our team was to use tailwind for CSS-in-JS styled but. I had to use inline styling because for some reason tailwind was not working and I was unable to install styled components.
+
+import React, { useState } from "react";
+//import Dashboard from "../components/Dashboard";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [dailyGoal, setDailyGoal] = useState(""); // input daily goal
+  const [savedGoal, setSavedGoal] = useState(""); // store daily goal
+  const [foodCalorie, setFoodCalorie] = useState(""); // input for food item calories
+  const [dailyCalories, setDailyCalories] = useState<number[]>([]); // store every input the user makes in that day
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+// function to save the daily goal would be displayed on the dashboard page
+  const saveDailyGoal = () => {
+    if (dailyGoal) { // if a goal was inputted
+      setSavedGoal(dailyGoal);
+      setDailyGoal(""); // clear the input after saving
+    }
+  };
+// function to periodically calculate the total calories a user consumed
+  const totalCal = dailyCalories.reduce((total, calorie) => total + calorie, 0);
+
+  const calorieTotal = () => {
+    if (foodCalorie) {
+      setDailyCalories((prev) => [...prev, Number(foodCalorie)]); // Add calorie to the list of entries inputted each day
+      setFoodCalorie(""); // clear the input field
+    }
+  };
+
+  return (
+<div
+  // Style the entire page with a pale orange background and center content vertically and horizontally
+  style={{
+    backgroundColor: "#FFDAB9", // Pale orange background
+    height: "100vh", 
+    display: "flex", // Flexbox layout
+    flexDirection: "column", // Stack items vertically
+    alignItems: "center", // Center items horizontally
+    padding: "20px", 
+  }}
+>
+  <h1
+    // Style the main header with white text and monospace font
+    style={{
+      fontSize: "2.5rem", 
+      fontFamily: "monospace", 
+      color: "white", 
+      marginBottom: "20px", // Add space below the header
+    }}
+  >
+    Welcome to Your Personal Calorie Counter
+  </h1>
+
+  {/* Section to Input and Save Daily Goal */}
+  <div
+    // Style the daily goal input section as a card
+    style={{
+      backgroundColor: "white", // White card background
+      padding: "20px", // Padding inside the card
+      borderRadius: "12px", // Rounded corners
+      width: "100%", // Full width of parent
+      maxWidth: "400px", // Maximum width for responsiveness
+      marginBottom: "20px", 
+    }}
+  >
+    <p style={{ marginBottom: "10px" }}>
+      Input your daily calorie goal below:
+    </p>
+
+    <input
+      // Input for users to specify their daily calorie goal
+      type="number" // Numeric input type
+      value={dailyGoal} 
+      onChange={(e) => setDailyGoal(e.target.value)} // Update state on change
+      placeholder="Your Daily Goal" 
+
+      style={{
+        width: "80%", // Input width as 80% of parent
+        padding: "10px", 
+        marginBottom: "15px", // Space below the input
+        border: "1px solid black", // Light black border
+        borderRadius: "8px", // Rounded corners
+        fontFamily: "monospace", 
+        fontSize: "1rem", 
+        color: "black", 
+      }}
+    />
+
+    <button
+      // Button to save the daily goal
+
+      onClick={saveDailyGoal} //  save logic on click
+
+      style={{
+        width: "100%", // Button spans the full width of parent
+        padding: "10px", 
+        border: "none", 
+        borderRadius: "8px", 
+        backgroundColor: "white", 
+        color: "black", 
+        fontFamily: "monospace", // Monospace font style
+        fontSize: "1rem", 
+        cursor: "pointer", // Pointer cursor on hover
+        transition: "background-color 0.3s", // smooth transition for hover effect
+      }}
+      // Change button color on hover
+      onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#FFA726")}
+      onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "white")}
+    >
+      Save Goal
+    </button>
+
+    {/* Display the saved daily goal */}
+    {savedGoal && (
+      <p
+        style={{
+          color: "black", // Black text
+          fontFamily: "monospace", // Monospace font style
+          marginTop: "10px", // Space above the message
+        }}
+      >
+        Your Daily Goal is: {savedGoal} Calories.
+      </p>
+    )}
+  </div>
+
+  {/* Section to Input Food Item Calories */}
+  <div
+    // Style the calorie entry section as a card
+    style={{
+      backgroundColor: "white", // White card background
+      padding: "20px", 
+      borderRadius: "12px", 
+      width: "100%", 
+      maxWidth: "400px", // Maximum width for responsiveness
+    }}
+  >
+    <p style={{ marginBottom: "10px" }}>Input your calories below:</p>
+    <h1
+      // Style the section header
+      style={{
+        fontSize: "2rem", // Large font size
+        fontFamily: "monospace", 
+        color: "white", 
+        marginBottom: "20px", 
+      }}
+    >
+      Enter Calories
+    </h1>
+
+    <input
+      // Input for users to specify food calories
+      type="number" // Numeric input type
+      value={foodCalorie} //
+      onChange={(e) => setFoodCalorie(e.target.value)} // Update state on change
+      placeholder="Enter Calories" // Placeholder text
+
+      style={{
+        width: "80%", // Input width as 80% of parent
+        padding: "10px", 
+        marginBottom: "15px", 
+        border: "1px solid black", 
+        borderRadius: "8px", // Rounded corners
+        fontFamily: "monospace", 
+        fontSize: "1rem", // Standard font size
+        color: "black", // Dark text color
+      }}
+    />
+
+    <button
+      // Button to add the calorie entry
+      onClick={() => {
+        if (Number(foodCalorie) + totalCal > Number(savedGoal)) {
+          // Alert if calorie total exceeds goal
+          alert("Warning: This entry will exceed your daily calorie goal!");
+        }
+        calorieTotal(); // Add the entry
+      }}
+      style={{
+        width: "100%", // Button spans the full width of parent
+        padding: "10px", 
+        border: "none", 
+        borderRadius: "8px", 
+        backgroundColor: "white", 
+        color: "black", 
+        fontFamily: "monospace", 
+        fontSize: "1rem", 
+        cursor: "pointer", // Pointer cursor on hover
+        transition: "background-color 0.3s", // Smooth transition for hover effect
+      }}
+      // Change button color on hover
+      onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#FFA726")}
+      onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "white")}
+    >
+      Add Calories
+    </button>
+
+  {/*Handle the user's input */}
+    {foodCalorie && (
+      <p
+        style={{
+          color: "black", // Black text
+          fontFamily: "monospace", // Monospace font style
+          marginTop: "10px", // Space above the message
+        }}
+      >
+        Your Input is: {foodCalorie}
+      </p>
+    )}
+
+    {/* Display warning message if total calories exceed the goal */}
+    {Number(foodCalorie) + totalCal > Number(savedGoal) && (
+      <p
+        style={{
+          color: "red", // Red text for warning
+          fontWeight: "bold", // Bold text
+          marginTop: "10px", // Space above the warning
+        }}
+      >
+        Warning: This entry exceeds your daily goal!
+      </p>
+    )}
+  </div>
+
+  {/* Display the daily goal and total calories consumed so far to the Dashboard component*/}
+{/* Pass the total calories and daily goal as props to the dashboard component */ }
+ { /*<Dashboard savedGoal={savedGoal} totalCalories={totalCal} > */}/
+
+</div>
   );
 }
