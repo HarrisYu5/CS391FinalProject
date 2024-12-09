@@ -1,3 +1,5 @@
+// Code by Derinell Rojas
+
 "use client"
 import Link from "next/link";
 import styled from "styled-components";
@@ -55,3 +57,5 @@ export default function Header() {
     </HeaderContainer>
   );
 }
+
+// Code by Derinell Rojas

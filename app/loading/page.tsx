@@ -1,3 +1,5 @@
+// Code by Derinell Rojas 
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -71,7 +73,13 @@ const Loading = () => {
       }
     };
     fetchQuote();
-  }, []); // Dependency array to avoid infinite fetching
+  
+      const timer = setTimeout(() => {
+        redirect('/'); // Navigate to login page
+      }, 5000); // 10 seconds duration
+  
+      return () => clearTimeout(timer); // Cleanup timer
+    }, []);
 
   return (
     <Container>
@@ -90,3 +98,5 @@ const Loading = () => {
 };
 
 export default Loading;
+
+// Code by Derinell Rojas 
