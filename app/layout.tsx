@@ -1,27 +1,12 @@
 import React from "react";
-
-<<<<<<< HEAD
+import Header from "./components/header";
 export default function RootLayout({children,}: Readonly<{ children: React.ReactNode;}>){
-=======
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
->>>>>>> origin/main
   return (
     <html lang="en">
       <body>
+        <Header />
         {children}
       </body>
     </html>
   );
-<<<<<<< HEAD
 }
-=======
-  
-}
-
-
-
->>>>>>> origin/main
