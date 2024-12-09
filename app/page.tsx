@@ -226,7 +226,7 @@ export default function Home() {
 
   {/* Display the daily goal and total calories consumed so far to the Dashboard component*/}
 {/* Pass the total calories and daily goal as props to the dashboard component */ }
- { /*<Dashboard savedGoal={savedGoal} totalCalories={totalCal} > */}/
+ {/* <Dashboard savedGoal={savedGoal} totalCalories={totalCal} > */}
 
 </div>
   );
