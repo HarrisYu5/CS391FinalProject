@@ -50,7 +50,7 @@ export default function Header() {
       <NavLinks>
         <NavLink href="/dashboard">Dashboard</NavLink>
         <NavLink href="/">Search Food</NavLink>
-        <NavLink href="/">Input Calories</NavLink>
+        <NavLink href="/loading">Input Calories</NavLink>
       </NavLinks>
     </HeaderContainer>
   );
