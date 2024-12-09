@@ -1,6 +1,14 @@
 import React from "react";
 
+<<<<<<< HEAD
 export default function RootLayout({children,}: Readonly<{ children: React.ReactNode;}>){
+=======
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+>>>>>>> origin/main
   return (
     <html lang="en">
       <body>
@@ -8,4 +16,12 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
       </body>
     </html>
   );
+<<<<<<< HEAD
 }
+=======
+  
+}
+
+
+
+>>>>>>> origin/main

@@ -1,5 +1,6 @@
 "use client";
 
+<<<<<<< HEAD
 //page.tsx/ Input Calories component- Lilly Anestal was responsible for all the code in this page
 // our team was to use tailwind for CSS-in-JS styled but. I had to use inline styling because for some reason tailwind was not working and I was unable to install styled components.
 
@@ -230,4 +231,15 @@ export default function Home() {
 
 </div>
   );
+=======
+import Search from "../com/Search";
+
+export default function Home() {
+  return (
+    <div>
+        <h1>Calorie Counter</h1>
+        <Search />
+    </div>
+);
+>>>>>>> origin/main
 }
