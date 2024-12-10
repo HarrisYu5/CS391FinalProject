@@ -1,5 +1,8 @@
+
+//LILLY ANESTAL WAS RESPONSIBLE FOR THE ALLL THE CODE IN THIS COMPONENT
+
 "use client";
-//Lilly Anestal was responsible for all the code for this component
+
 
 
 import React, { useState } from "react";
