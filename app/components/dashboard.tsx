@@ -1,11 +1,84 @@
 // Dashboard component made by Roman Bukhovko 
 "use client";
+import { Container } from "postcss";
 import { useState, useEffect } from "react";
+import styled from "styled-components";
 
 interface DashboardProps{
     savedGoal: string;
     totalCalories: number;
 }
+
+const Wrapper = styled.div`
+    height: 100vh;
+    background-color: white;
+`;
+
+const Title = styled.h1`
+    font-weight: bold;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+    font-size: 30px;
+    height: 35px;
+    background-color: #ffd5b9;
+    color: #fef3c7;
+    border-radius: 10px;
+`
+
+const FlexContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly; 
+`
+
+const Card = styled.div`
+    padding: 20px;
+`
+
+const CardTitle = styled.div`
+    padding: 10px; 
+    background-color: #ffd5b9;
+    color: #fef3c7;
+    border-top-left-radius: 10px; 
+    border-top-right-radius: 10px; 
+`
+
+const CardBody = styled.div`
+    padding: 10px; 
+    text-align: center;
+    background-color: gray;
+    color: #fef3c7;
+    border-bottom-left-radius: 10px; 
+    border-bottom-right-radius: 10px; 
+`
+
+const Section = styled.div`
+    padding: 10px;
+    margin: 5px;
+`
+
+const SectionTitle = styled.h2`
+    padding: 10px;
+    text-align: center;
+    background-color: #ffd5b9;
+    color: #fef3c7;
+    border-top-left-radius: 10px; 
+    border-top-right-radius: 10px; 
+`
+
+const SectionBody = styled.div`
+    text-align: center;
+    background-color: gray;
+    color: #fef3c7;
+    border-bottom-left-radius: 10px; 
+    border-bottom-right-radius: 10px;
+`
+
+const ListItem = styled.li`
+    display: flex;
+    justify-content: space-evenly;
+`
 
 export default function Dashboard({savedGoal, totalCalories}: DashboardProps){
     //Calories of food eaten today
@@ -35,132 +108,58 @@ export default function Dashboard({savedGoal, totalCalories}: DashboardProps){
     
     return (
         //Title Dashboard
-        <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
-        <h1 style={{ 
-            fontWeight: 'bold', 
-            padding: '1.25rem', 
-            margin: '1.25rem', 
-            textAlign: 'center', 
-            fontSize: '2.25rem', 
-            height: '5rem', 
-            backgroundColor: '#FFDAB9', 
-            color: '#fef3c7', 
-            borderRadius: '0.5rem' 
-        }}>
-            DashBoard
-        </h1>
+        <Wrapper>
+            <Title>DashBoard</Title>
 
-        <div //Shows the Calories that have been gained today and were calculated from the useEffect
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-            <div style={{ padding: '1.25rem' }}>
-                <div style={{ 
-                    padding: '0.75rem', 
-                    backgroundColor: '#FFDAB9', 
-                    color: '#fef3c7', 
-                    borderTopLeftRadius: '0.5rem', 
-                    borderTopRightRadius: '0.5rem' 
-                }}>
-                    Calories Gained Today
-                </div>
+            <FlexContainer /*Shows the Calories that have been gained today and were calculated from the useEffect*/>
+                <Card>
+                    <CardTitle>
+                        Calories Gained Today 
+                    </CardTitle>
 
-                <div style={{ 
-                    padding: '0.5rem', 
-                    textAlign: 'center', 
-                    backgroundColor: '#d1d5db', 
-                    color: '#fef3c7', 
-                    borderBottomLeftRadius: '0.5rem', 
-                    borderBottomRightRadius: '0.5rem' 
-                }}>
-                    {cal}
-                </div>
-            </div>
+                    <CardBody>
+                        {totalCalories}
+                    </CardBody>
+                </Card>
 
-            <div //The Daily Goal
-                style={{ padding: '1.25rem' }}>
-                <div style={{ 
-                    padding: '0.75rem', 
-                    backgroundColor: '#FFDAB9', 
-                    color: '#fef3c7', 
-                    borderTopLeftRadius: '0.5rem', 
-                    borderTopRightRadius: '0.5rem' 
-                }}>
-                    Daily Goal
-                </div>
+                <Card /*The Daily Goal*/>
+                    <CardTitle>
+                        Daily Goal 
+                    </CardTitle>
 
-                <div style={{ 
-                    padding: '0.5rem', 
-                    textAlign: 'center', 
-                    backgroundColor: '#d1d5db', 
-                    color: '#fef3c7', 
-                    borderBottomLeftRadius: '0.5rem', 
-                    borderBottomRightRadius: '0.5rem' 
-                }}>
-                    {savedGoal}
-                </div>
-            </div>
-        </div>
+                    <CardBody>
+                        {savedGoal}
+                    </CardBody>
+                </Card>
+            </FlexContainer>
 
-        <div //All the foods that were eaten today
-            style={{ padding: '1.25rem', margin: '0.5rem' }}>
-            <h2 style={{ 
-                padding: '0.75rem', 
-                textAlign: 'center', 
-                backgroundColor: '#FFDAB9', 
-                color: '#fef3c7', 
-                borderTopLeftRadius: '0.5rem', 
-                borderTopRightRadius: '0.5rem' 
-            }}>
-                Foods Eaten Today
-            </h2>
-            <div style={{ 
-                padding: '0.5rem', 
-                textAlign: 'center', 
-                backgroundColor: '#d1d5db', 
-                color: '#fef3c7', 
-                borderBottomLeftRadius: '0.5rem', 
-                borderBottomRightRadius: '0.5rem' 
-            }}>
-                <ul>
-                    {foodsToday.map((food, key) => (
-                        <li key={key} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <p>{food.name}</p>
-                            <p>{food.calories * food.servingSize}</p>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
+            <Section /*All the foods that were eaten today*/>
+                <SectionTitle>Foods Eaten Today</SectionTitle>
+                <SectionBody>
+                    <ul>
+                        {foodsToday.map((food, key) =>
+                            <ListItem key={key}>
+                                <p>{food.name}</p>
+                                <p>{food.calories * food.servingSize}</p>
+                            </ListItem>
+                        )}
+                    </ul>
+                </SectionBody>
+            </Section>
 
-        <div //The previous dates and the calories consumed during those days
-            style={{ padding: '1.25rem', margin: '0.5rem' }}>
-            <h2 style={{ 
-                padding: '0.75rem', 
-                textAlign: 'center', 
-                backgroundColor: '#FFDAB9', 
-                color: '#fef3c7', 
-                borderTopLeftRadius: '0.5rem', 
-                borderTopRightRadius: '0.5rem' 
-            }}>
-                Previous Days
-            </h2>
-            <div style={{ 
-                padding: '0.5rem', 
-                textAlign: 'center', 
-                backgroundColor: '#d1d5db', 
-                color: '#fef3c7', 
-                borderBottomLeftRadius: '0.5rem', 
-                borderBottomRightRadius: '0.5rem' 
-            }}>
-                <ul>
-                    {previousDays.map((day, key) => (
-                        <li key={key} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <p>{day.date}</p>
-                            <p>{day.calories}</p>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
-    </div>
+            <Section /*The previous dates and the calories consumed during those days*/> 
+                <SectionTitle>Previous Days</SectionTitle>
+                <SectionBody>
+                    <ul>
+                        {previousDays.map((day, key) =>
+                            <ListItem key={key}>
+                                <p>{day.date}</p>
+                                <p>{day.calories}</p>
+                            </ListItem>
+                        )}
+                    </ul>
+                </SectionBody>
+            </Section>
+        </Wrapper>
     )
 }
