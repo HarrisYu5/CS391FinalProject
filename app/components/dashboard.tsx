@@ -1,79 +1,156 @@
-"use client"
-/** Dashboard component made by Roman Bukhovko */
+// Dashboard component made by Roman Bukhovko 
+"use client";
 import { useState, useEffect } from "react";
+import useSWR from "swr";
+import {useParams} from "next/navigation";
 
-export default function Dashboard(){
+interface DashboardProps{
+    savedGoal: string;
+    totalCalories: number;
+}
+
+export default function Dashboard({savedGoal, totalCalories}: DashboardProps){
     const [cal, setCal] = useState(0);
     const [goal, setGoal] = useState(0);
-
     const [foodsToday, setFoodsToday] = useState([
         {name: "Apple", calories: 95, servingSize: 2},
         {name: "Sandwich", calories: 200, servingSize: 1}
     ]);
-
     const [previousDays, setPreviousDays] = useState([
         {date: '2024-12-05', calories: 1800},
         {date: '2024-12-04', calories: 2000},
         {date: '2024-12-03', calories: 1750}
     ]);
-
     useEffect(() => {
         const calToday = foodsToday.reduce((total, food) => total + food.calories * food.servingSize, 0)
         setCal(calToday);
         setGoal(2000);
-    })
+    }, [foodsToday])
     
 
     return (
-        <div className="min-h-screen bg-white">
-            <h1 className="font-bold p-5 m-5 text-center text-4xl h-20 bg-amber-500 text-amber-100 rounded-lg">DashBoard</h1>
+        <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
+        <h1 style={{ 
+            fontWeight: 'bold', 
+            padding: '1.25rem', 
+            margin: '1.25rem', 
+            textAlign: 'center', 
+            fontSize: '2.25rem', 
+            height: '5rem', 
+            backgroundColor: '#f59e0b', 
+            color: '#fef3c7', 
+            borderRadius: '0.5rem' 
+        }}>
+            DashBoard
+        </h1>
 
-            <div className="flex items-center justify-evenly">
-                <div className="p-5">
-                    <div className="p-3 bg-amber-500 text-amber-100 rounded-t-lg">
-                        Calories Gained Today 
-                    </div>
-
-                    <div className="p-2 text-center bg-gray-300 text-amber-100 rounded-b-lg">
-                        {cal}
-                    </div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
+            <div style={{ padding: '1.25rem' }}>
+                <div style={{ 
+                    padding: '0.75rem', 
+                    backgroundColor: '#f59e0b', 
+                    color: '#fef3c7', 
+                    borderTopLeftRadius: '0.5rem', 
+                    borderTopRightRadius: '0.5rem' 
+                }}>
+                    Calories Gained Today
                 </div>
 
-                <div className="p-5">
-                    <div className="p-3 bg-amber-500 text-amber-100 rounded-t-lg">
-                        Daily Goal 
-                    </div>
-
-                    <div className="p-2 text-center bg-gray-300 text-amber-100 rounded-b-lg">
-                        {goal}
-                    </div>
+                <div style={{ 
+                    padding: '0.5rem', 
+                    textAlign: 'center', 
+                    backgroundColor: '#d1d5db', 
+                    color: '#fef3c7', 
+                    borderBottomLeftRadius: '0.5rem', 
+                    borderBottomRightRadius: '0.5rem' 
+                }}>
+                    {totalCalories}
                 </div>
             </div>
 
-            <div className="p-5 m-2">
-                <h2 className="p-3 text-center bg-amber-500 text-amber-100 rounded-t-lg">Foods Eaten Today</h2>
-                <div className="p-2 text-center bg-gray-300 text-amber-100 rounded-b-lg">
-                    {foodsToday.map((food) =>
-                        <li className="flex justify-between">
+            <div style={{ padding: '1.25rem' }}>
+                <div style={{ 
+                    padding: '0.75rem', 
+                    backgroundColor: '#f59e0b', 
+                    color: '#fef3c7', 
+                    borderTopLeftRadius: '0.5rem', 
+                    borderTopRightRadius: '0.5rem' 
+                }}>
+                    Daily Goal
+                </div>
+
+                <div style={{ 
+                    padding: '0.5rem', 
+                    textAlign: 'center', 
+                    backgroundColor: '#d1d5db', 
+                    color: '#fef3c7', 
+                    borderBottomLeftRadius: '0.5rem', 
+                    borderBottomRightRadius: '0.5rem' 
+                }}>
+                    {savedGoal}
+                </div>
+            </div>
+        </div>
+
+        <div style={{ padding: '1.25rem', margin: '0.5rem' }}>
+            <h2 style={{ 
+                padding: '0.75rem', 
+                textAlign: 'center', 
+                backgroundColor: '#f59e0b', 
+                color: '#fef3c7', 
+                borderTopLeftRadius: '0.5rem', 
+                borderTopRightRadius: '0.5rem' 
+            }}>
+                Foods Eaten Today
+            </h2>
+            <div style={{ 
+                padding: '0.5rem', 
+                textAlign: 'center', 
+                backgroundColor: '#d1d5db', 
+                color: '#fef3c7', 
+                borderBottomLeftRadius: '0.5rem', 
+                borderBottomRightRadius: '0.5rem' 
+            }}>
+                <ul>
+                    {foodsToday.map((food, key) => (
+                        <li key={key} style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <p>{food.name}</p>
                             <p>{food.calories * food.servingSize}</p>
                         </li>
-                    )}
-                </div>
+                    ))}
+                </ul>
             </div>
+        </div>
 
-            <div className="p-5 m-2">
-                <h2 className="p-3 text-center bg-amber-500 text-amber-100 rounded-t-lg">Previous Days</h2>
-                <div className="p-2 text-center bg-gray-300 text-amber-100 rounded-b-lg">
-                    {previousDays.map((day) =>
-                        <li className="flex justify-between">
+        <div style={{ padding: '1.25rem', margin: '0.5rem' }}>
+            <h2 style={{ 
+                padding: '0.75rem', 
+                textAlign: 'center', 
+                backgroundColor: '#f59e0b', 
+                color: '#fef3c7', 
+                borderTopLeftRadius: '0.5rem', 
+                borderTopRightRadius: '0.5rem' 
+            }}>
+                Previous Days
+            </h2>
+            <div style={{ 
+                padding: '0.5rem', 
+                textAlign: 'center', 
+                backgroundColor: '#d1d5db', 
+                color: '#fef3c7', 
+                borderBottomLeftRadius: '0.5rem', 
+                borderBottomRightRadius: '0.5rem' 
+            }}>
+                <ul>
+                    {previousDays.map((day, key) => (
+                        <li key={key} style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <p>{day.date}</p>
                             <p>{day.calories}</p>
                         </li>
-                    )}
-                </div>
+                    ))}
+                </ul>
             </div>
-            
         </div>
-    )
+    </div>
+)
 }

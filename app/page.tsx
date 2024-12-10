@@ -4,7 +4,7 @@
 // our team was to use tailwind for CSS-in-JS styled but. I had to use inline styling because for some reason tailwind was not working and I was unable to install styled components.
 
 import React, { useState } from "react";
-//import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/dashboard";
 
 
 export default function Home() {
@@ -31,6 +31,7 @@ export default function Home() {
   };
 
   return (
+    <>
 <div
   // Style the entire page with a pale orange background and center content vertically and horizontally
   style={{
@@ -223,14 +224,14 @@ export default function Home() {
         Warning: This entry exceeds your daily goal!
       </p>
     )}
+    
   </div>
 
   {/* Display the daily goal and total calories consumed so far to the Dashboard component*/}
 {/* Pass the total calories and daily goal as props to the dashboard component */ }
-{ /*<Dashboard savedGoal={savedGoal} totalCalories={totalCal} /> */}
-
-
 
 </div>
+<Dashboard savedGoal={savedGoal} totalCalories={totalCal} />
+</>
   );
 }
