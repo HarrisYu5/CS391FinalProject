@@ -1,8 +1,6 @@
 // Dashboard component made by Roman Bukhovko 
 "use client";
 import { useState, useEffect } from "react";
-import useSWR from "swr";
-import {useParams} from "next/navigation";
 
 interface DashboardProps{
     savedGoal: string;
@@ -10,25 +8,33 @@ interface DashboardProps{
 }
 
 export default function Dashboard({savedGoal, totalCalories}: DashboardProps){
+    //Calories of food eaten today
     const [cal, setCal] = useState(0);
+    //Daily goal 
     const [goal, setGoal] = useState(0);
+
+    //Example data for food eaten today
     const [foodsToday, setFoodsToday] = useState([
         {name: "Apple", calories: 95, servingSize: 2},
-        {name: "Sandwich", calories: 200, servingSize: 1}
+        {name: "Chicken", calories: 200, servingSize: 1}
     ]);
+
+    //Example data for previous days and the calories consumed that day
     const [previousDays, setPreviousDays] = useState([
         {date: '2024-12-05', calories: 1800},
         {date: '2024-12-04', calories: 2000},
         {date: '2024-12-03', calories: 1750}
     ]);
+
     useEffect(() => {
-        const calToday = foodsToday.reduce((total, food) => total + food.calories * food.servingSize, 0)
-        setCal(calToday);
-        setGoal(2000);
+        //Calculates how many calories were consumed today
+        const cal = foodsToday.reduce((total, food) => total + food.calories * food.servingSize, 0);
+        setCal(cal);
+        setGoal(savedGoal);
     }, [foodsToday])
     
-
     return (
+        //Title Dashboard
         <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
         <h1 style={{ 
             fontWeight: 'bold', 
@@ -37,18 +43,19 @@ export default function Dashboard({savedGoal, totalCalories}: DashboardProps){
             textAlign: 'center', 
             fontSize: '2.25rem', 
             height: '5rem', 
-            backgroundColor: '#f59e0b', 
+            backgroundColor: '#FFDAB9', 
             color: '#fef3c7', 
             borderRadius: '0.5rem' 
         }}>
             DashBoard
         </h1>
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
+        <div //Shows the Calories that have been gained today and were calculated from the useEffect
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
             <div style={{ padding: '1.25rem' }}>
                 <div style={{ 
                     padding: '0.75rem', 
-                    backgroundColor: '#f59e0b', 
+                    backgroundColor: '#FFDAB9', 
                     color: '#fef3c7', 
                     borderTopLeftRadius: '0.5rem', 
                     borderTopRightRadius: '0.5rem' 
@@ -64,14 +71,15 @@ export default function Dashboard({savedGoal, totalCalories}: DashboardProps){
                     borderBottomLeftRadius: '0.5rem', 
                     borderBottomRightRadius: '0.5rem' 
                 }}>
-                    {totalCalories}
+                    {cal}
                 </div>
             </div>
 
-            <div style={{ padding: '1.25rem' }}>
+            <div //The Daily Goal
+                style={{ padding: '1.25rem' }}>
                 <div style={{ 
                     padding: '0.75rem', 
-                    backgroundColor: '#f59e0b', 
+                    backgroundColor: '#FFDAB9', 
                     color: '#fef3c7', 
                     borderTopLeftRadius: '0.5rem', 
                     borderTopRightRadius: '0.5rem' 
@@ -92,11 +100,12 @@ export default function Dashboard({savedGoal, totalCalories}: DashboardProps){
             </div>
         </div>
 
-        <div style={{ padding: '1.25rem', margin: '0.5rem' }}>
+        <div //All the foods that were eaten today
+            style={{ padding: '1.25rem', margin: '0.5rem' }}>
             <h2 style={{ 
                 padding: '0.75rem', 
                 textAlign: 'center', 
-                backgroundColor: '#f59e0b', 
+                backgroundColor: '#FFDAB9', 
                 color: '#fef3c7', 
                 borderTopLeftRadius: '0.5rem', 
                 borderTopRightRadius: '0.5rem' 
@@ -122,11 +131,12 @@ export default function Dashboard({savedGoal, totalCalories}: DashboardProps){
             </div>
         </div>
 
-        <div style={{ padding: '1.25rem', margin: '0.5rem' }}>
+        <div //The previous dates and the calories consumed during those days
+            style={{ padding: '1.25rem', margin: '0.5rem' }}>
             <h2 style={{ 
                 padding: '0.75rem', 
                 textAlign: 'center', 
-                backgroundColor: '#f59e0b', 
+                backgroundColor: '#FFDAB9', 
                 color: '#fef3c7', 
                 borderTopLeftRadius: '0.5rem', 
                 borderTopRightRadius: '0.5rem' 
@@ -152,5 +162,5 @@ export default function Dashboard({savedGoal, totalCalories}: DashboardProps){
             </div>
         </div>
     </div>
-)
+    )
 }
