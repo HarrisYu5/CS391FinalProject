@@ -4,12 +4,14 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+//Styling the container
 const Container = styled.div`
     margin: 20px auto;
-    max-width: 80%;
+    max-width: 90%;
     text-align: center;
 `;
 
+//Styling for the input field
 const Input = styled.input`
     padding: 10px;
     width: 70%;
@@ -19,6 +21,7 @@ const Input = styled.input`
     font-size: 16px;
 `;
 
+//Styling for the button
 const Button = styled.button`
     padding: 10px 20px;
     background-color: #2f2d2d;
@@ -33,6 +36,7 @@ const Button = styled.button`
     }
 `;
 
+//Styling the layout for search results
 const Results = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -40,6 +44,7 @@ const Results = styled.div`
     margin-top: 20px;
 `;
 
+//Styling the layout for each food item in the search results
 const Card = styled.div`
     background: #fff;
     border: 1px solid #e6e6e6;
@@ -55,6 +60,7 @@ const Card = styled.div`
     }
 `;
 
+//Styling for the weight input field
 const WeightInput = styled.input`
   margin-top: 10px;
   padding: 5px;
@@ -64,6 +70,7 @@ const WeightInput = styled.input`
   font-size: 14px;
 `;
 
+//Styling for the Add button in each search result
 const AddButton = styled.button`
   margin-top: 10px;
   padding: 5px 10px;
@@ -79,11 +86,13 @@ const AddButton = styled.button`
   }
 `;
 
+//Style the container for the selected foods section
 const SelectedFoodsContainer = styled.div`
     margin-top: 40px;
     text-align: left;
 `;
 
+//Style the layout for each selected food item
 const SelectedItem = styled.div`
     display: flex;
     justify-content: space-between;
@@ -101,6 +110,7 @@ const SelectedItem = styled.div`
     }
 `;
 
+//Style the buttons for editing and deleting items
 const ActionButton = styled.button`
     padding: 6px 10px;
     border-radius: 8px;
@@ -128,8 +138,9 @@ const ActionButton = styled.button`
     }
 `;
 
+//Style the container for the search section
 const SearchComponent = styled.div`
-    background-color: rgba(234, 191, 118, 0.6);
+    background-color: #FFDAB9; //rgba(234, 191, 118, 0.6);
     border: 1px solid #e6e6e6;
     border-radius: 12px;
     padding: 20px;
@@ -212,7 +223,7 @@ export default function Search() {
             setSelectedFoods((prev) => [...prev, { name: item.name, weight, calories }]);
             setShowSelectedFoods(true);
         } else {
-            alert("Please enter a valid weight!");
+            alert("Please enter a valid weight.");
         }
     };
 
@@ -256,6 +267,7 @@ export default function Search() {
     for (let i = 0; i < selectedFoods.length; i++) {
         totalCalories += selectedFoods[i].calories;
     }
+
 
     return (
         <Container>

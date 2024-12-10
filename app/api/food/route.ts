@@ -3,14 +3,19 @@
 import { NextRequest, NextResponse } from "next/server";
 
 //Fetch the USDA API key
-const USDA_API_KEY = process.env.USDA_API_KEY;
+//const USDA_API_KEY = process.env.USDA_API_KEY;
+//I can store the API key in the local environment to enhance security
+// by keeping the key separate from the source code, ensuring it won't
+// get exposed if I share my code or push it to a public repository.
+const USDA_API_KEY = "2CSDwVdmp7R8GdAdfojKE8LJz9X2NsuJjkPPwNoF";
 
-//Define types for food data
+//Define types for data
 interface FoodNutrient {
     nutrientName: string;
     value: number;
 }
 
+//Define types for data
 interface Food {
     description: string;
     foodNutrients: FoodNutrient[];
