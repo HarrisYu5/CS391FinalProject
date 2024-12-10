@@ -7,7 +7,7 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
-//import Dashboard from "./components/dashboard";
+import Dashboard from "./components/dashboard";
 //import Header from "./components/header"
 
 
@@ -103,6 +103,7 @@ export default function Home() {
   };
 
   return (
+    <>
     <PageContainer>
       <Header>Welcome to Your Personal Calorie Counter</Header>
 
@@ -148,6 +149,9 @@ export default function Home() {
           <WarningText>Warning: This entry exceeds your daily goal!</WarningText>
         )}
       </Card>
+      
     </PageContainer>
+    <Dashboard savedGoal={savedGoal} totalCalories={totalCal}/>
+    </>
   );
 }
