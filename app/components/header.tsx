@@ -53,6 +53,7 @@ export default function Header() {
         <NavLink href="/dashboard">Dashboard</NavLink>
         <NavLink href="/">Search Food</NavLink>
         <NavLink href="/loading">Input Calories</NavLink>
+        <NavLink href="/profile">Profile</NavLink>
       </NavLinks>
     </HeaderContainer>
   );

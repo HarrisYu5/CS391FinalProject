@@ -1,0 +1,9 @@
+{
+ "User": {
+  "name": "smith",
+  "weight": 93,
+  "height": 190,
+  "age": 44,
+  "sex": "female"
+ }
+}
