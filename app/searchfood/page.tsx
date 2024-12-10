@@ -284,6 +284,9 @@ export default function Search() {
                         onChange={(e) => setFood(e.target.value)}
                     />
                     <Button onClick={handleSearch}>Search</Button>
+                    <p>
+                        Data provided by USDA FoodData Central API
+                    </p>
                 </div>
                 {/* Display error message if any */}
                 {error && <p style={{color: "red"}}>{error}</p>}
