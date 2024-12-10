@@ -1,10 +1,11 @@
 "use client";
 
 //page.tsx/ Input Calories component- Lilly Anestal was responsible for all the code in this page
-// our team was to use tailwind for CSS-in-JS styled but. I had to use inline styling because for some reason tailwind was not working and I was unable to install styled components.
+// our team was to use tailwind for CSS-in-JS styled but. I had to use inline styling because for some reason tailwind was not working and my computer was unable to install styled components.
 
 import React, { useState } from "react";
 import Dashboard from "./components/dashboard";
+import Header from "./components/header"
 
 
 export default function Home() {
@@ -32,6 +33,7 @@ export default function Home() {
 
   return (
     <>
+    <Header /> {/* display the naviagation bar*/}
 <div
   // Style the entire page with a pale orange background and center content vertically and horizontally
   style={{
