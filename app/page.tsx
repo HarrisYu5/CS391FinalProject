@@ -5,7 +5,7 @@
 
 import React, { useState } from "react";
 import Dashboard from "./components/dashboard";
-import Header from "./components/header"
+//import Header from "./components/header"
 
 
 export default function Home() {
@@ -33,7 +33,7 @@ export default function Home() {
 
   return (
     <>
-    <Header /> {/* display the naviagation bar*/}
+  {/* display the naviagation bar*/}
 <div
   // Style the entire page with a pale orange background and center content vertically and horizontally
   style={{
