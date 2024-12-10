@@ -33,7 +33,7 @@ export default function Home() {
 
   return (
     <>
-  {/* display the naviagation bar*/}
+  {/* the naviagation bar should be displayed here */}
 <div
   // Style the entire page with a pale orange background and center content vertically and horizontally
   style={{
@@ -233,7 +233,7 @@ export default function Home() {
 {/* Pass the total calories and daily goal as props to the dashboard component */ }
 
 </div>
- {/* <Dashboard savedGoal={savedGoal} totalCalories={totalCal} /> */}
+
 </>
   );
 }
